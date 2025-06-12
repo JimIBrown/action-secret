@@ -16,6 +16,8 @@ jobs:
         run: |
           Get-Location
 
+          Get-ChildItem -Recurse
+
           write-host "Updating .env files"
           $files = get-childitem -Recurse -Filter '.env.*' -File | Select-Object
           foreach ($file in $files) 
