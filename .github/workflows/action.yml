@@ -4,7 +4,7 @@ on:
   workflow_dispatch:
   
 jobs:
-  dotnet-package-build:
+  run-tests:
     runs-on: ubuntu-latest
 
     steps:
@@ -14,7 +14,8 @@ jobs:
       - name: add-secrets
         shell: pwsh
         run: |
-          $files = get-childitem -Path './.env templates' -Filter '.env.*' -File | Select-Object
+          write-host "Updating .env files"
+          $files = get-childitem -Path './.env_templates' -Filter '.env.*' -File | Select-Object
           foreach ($file in $files) 
             {
                 write-host "Updating: " $file.FullName
@@ -30,6 +31,7 @@ jobs:
       - name: read-secrets
         shell: pwsh
         run: |
+          write-host "Reading .env files"
           $files = get-childitem -Filter '.env.*' -File | Select-Object
           foreach ($file in $files) 
             {

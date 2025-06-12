@@ -12,4 +12,4 @@ mocha-junit-reporter
 .env.rc-tenant
 launch.json
 
-!.env templates/*
+!.env_templates/*
