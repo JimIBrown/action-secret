@@ -5,7 +5,7 @@ on:
   
 jobs:
   run-tests:
-    runs-on: windows-latest
+    runs-on: ubuntu-latest
 
     steps:
       - name: Git checkout
@@ -14,12 +14,9 @@ jobs:
       - name: add-secrets
         shell: pwsh
         run: |
-          Get-Location
-
-          Get-ChildItem -Recurse
-
+        
           write-host "Updating .env files"
-          $files = get-childitem -Recurse -Filter '.env.*' -File | Select-Object
+          $files = get-childitem -Path './env_templates' -Filter '*env.*' -File | Select-Object
           foreach ($file in $files) 
             {
                 write-host "Updating: " $file.FullName
@@ -36,7 +33,7 @@ jobs:
         shell: pwsh
         run: |
           write-host "Reading .env files"
-          $files = get-childitem -Filter '.env.*' -File | Select-Object
+          $files = get-childitem -Filter '*env.*' -File | Select-Object
           foreach ($file in $files) 
             {
                 write-host "------------"
