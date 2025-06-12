@@ -16,15 +16,15 @@ jobs:
         run: |
         
           write-host "Updating .env files"
-          $files = get-childitem -Path './env_templates' -Filter '*env.*' -File | Select-Object
+          $files = get-childitem -Filter '*env.*' -Recurse -File | Select-Object
           foreach ($file in $files) 
-            {
-                write-host "Updating: " $file.FullName
-                Copy-Item  $file.FullName .\
+          {
+              write-host "Updating: " $file.FullName
+              Copy-Item  $file.FullName .\
 
-                (Get-Content $file.Name) | % ` { $_-replace '{{PASSWORD}}', $env:PASSWORD } |  Set-Content $file.Name
-                (Get-Content $file.Name) | % ` { $_-replace '{{USER}}', $env:USER } |  Set-Content $file.Name
-            }
+              (Get-Content $file.Name) | % ` { $_-replace '{{PASSWORD}}', $env:PASSWORD } |  Set-Content $file.Name
+              (Get-Content $file.Name) | % ` { $_-replace '{{USER}}', $env:USER } |  Set-Content $file.Name
+          }
         env:
             PASSWORD: ${{ secrets.PASSWORD }}
             USER: ${{ secrets.USER }}
