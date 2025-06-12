@@ -1,0 +1,15 @@
+node_modules
+.vscode
+mochawesome-report
+mocha-junit-reporter
+.env.merlin-rc
+.env.merlin-test
+.env
+.env.merlin-api-test
+.env.merlin-api-development
+.env.merlin-gdp-development
+.env.test-tenant
+.env.rc-tenant
+launch.json
+
+!.env templates/*
