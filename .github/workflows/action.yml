@@ -15,7 +15,7 @@ jobs:
         shell: pwsh
         run: |
           write-host "Updating .env files"
-          $files = get-childitem -Path -Recurse -Filter '.env.*' -File | Select-Object
+          $files = get-childitem -Recurse -Filter '.env.*' -File | Select-Object
           foreach ($file in $files) 
             {
                 write-host "Updating: " $file.FullName
