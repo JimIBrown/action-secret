@@ -14,6 +14,8 @@ jobs:
       - name: add-secrets
         shell: pwsh
         run: |
+          Get-Location
+
           write-host "Updating .env files"
           $files = get-childitem -Recurse -Filter '.env.*' -File | Select-Object
           foreach ($file in $files) 
